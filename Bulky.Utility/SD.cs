@@ -11,6 +11,10 @@ namespace Bulky.Utility
         public const string Role_Customer = "Customer";
         public const string Role_Company = "Company";
         public const string Role_Admin = "Admin";
-        public const string Role_Employee = "Employee"; 
+        public const string Role_Employee = "Employee";
+        public const string Payment_Status_Pending = "PaymentStatusPending";
+        public const string Status_Pending = "StatusPending";
+        public const string Payment_Status_Delayed_Payment = "PaymentStatusDelayedPayment";
+        public const string Status_Approved = "StatusApproved";
     }
 }
