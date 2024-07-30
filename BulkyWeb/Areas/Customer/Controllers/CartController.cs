@@ -39,41 +39,6 @@ namespace BulkyWeb.Areas.Customer.Controllers
             return View(ShoppingCartVM);
         }
 
-
-
-        public IActionResult Plus(int cartId)
-        {
-            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ShoppingCartId == cartId);
-            cartFromDb.Count +=1;
-            _unitOfWork.ShoppingCart.Update(cartFromDb);
-            _unitOfWork.Save();
-            return RedirectToAction(nameof(Index));
-        }
-
-        public IActionResult Minus(int cartId)
-        {
-            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ShoppingCartId == cartId);
-            if (cartFromDb.Count <= 1)
-            {
-                _unitOfWork.ShoppingCart.Remove(cartFromDb);
-            }
-            else
-            {
-                cartFromDb.Count -= 1;
-                _unitOfWork.ShoppingCart.Update(cartFromDb);
-            }
-            _unitOfWork.Save();
-            return RedirectToAction(nameof(Index));
-        }
-
-        public IActionResult Remove(int cartId)
-        {
-            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ShoppingCartId == cartId);
-            _unitOfWork.ShoppingCart.Remove(cartFromDb);
-            _unitOfWork.Save();
-            return RedirectToAction(nameof(Index));
-        }
-
         public  IActionResult Summary()
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
@@ -100,6 +65,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
             }
             return View(ShoppingCartVM);
         }
+
         [HttpPost]
         [ActionName("Summary")]
         public IActionResult SummaryPOST()
@@ -154,6 +120,42 @@ namespace BulkyWeb.Areas.Customer.Controllers
             }
             return RedirectToAction(nameof(OrderConfirmation), new { id = ShoppingCartVM.OrderHeader.Id });
         }
+
+
+        public IActionResult Plus(int cartId)
+        {
+            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ShoppingCartId == cartId);
+            cartFromDb.Count += 1;
+            _unitOfWork.ShoppingCart.Update(cartFromDb);
+            _unitOfWork.Save();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Minus(int cartId)
+        {
+            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ShoppingCartId == cartId);
+            if (cartFromDb.Count <= 1)
+            {
+                _unitOfWork.ShoppingCart.Remove(cartFromDb);
+            }
+            else
+            {
+                cartFromDb.Count -= 1;
+                _unitOfWork.ShoppingCart.Update(cartFromDb);
+            }
+            _unitOfWork.Save();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Remove(int cartId)
+        {
+            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ShoppingCartId == cartId);
+            _unitOfWork.ShoppingCart.Remove(cartFromDb);
+            _unitOfWork.Save();
+            return RedirectToAction(nameof(Index));
+        }  
+
+
         public IActionResult OrderConfirmation(int id)
         {
             return View(id);
