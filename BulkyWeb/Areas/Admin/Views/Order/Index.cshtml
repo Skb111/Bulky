@@ -1,0 +1,59 @@
+﻿@* @model List<OrderVM> *@
+
+
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">Order List</h2>
+        </div>
+        @* <div class="col-6">
+            <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Insert Product
+          </a>  
+        </div> *@
+    </div>
+
+    <div class="d-flex justify-content-between pb-5 pt-2">
+        <span></span>
+        <ul class="list-group list-group-horizontal-sm">
+            <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" asp-route-status="inprocesss">
+                <li class="list-group-item">In Process</li>
+            </a>
+        </ul>
+    </div> 
+
+    <table id="tblData" class="table table-bordered table-striped">
+
+   <thead>
+        <tr>
+         @* <th> 
+                Product Id
+            </th> *@
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Total
+            </th>
+            <th></th> 
+        </tr>
+    </thead>
+</table>
+</div>
+
+ @section Scripts{
+    <script src="~/js/order.js"></script>
+}
+    
