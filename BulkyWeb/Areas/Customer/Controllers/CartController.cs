@@ -80,7 +80,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
             ShoppingCartVM.OrderHeader.OrderTime = System.DateTime.Now;
             ShoppingCartVM.OrderHeader.ApplicationUserId = userId;
 
-            //2R)QXknm!5C55Mb
+            //2BR)QXknSm!5KC55Mb
 
             ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
 

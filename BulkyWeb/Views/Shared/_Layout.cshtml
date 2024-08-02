@@ -54,7 +54,7 @@
                                 </ul>
                             </li>
                         }
-                        @if (HttpContextAccessor.HttpContext.Session.GetInt32(SD.Session_Cart) != null)
+                       @*  @if (HttpContextAccessor.HttpContext.Session.GetInt32(SD.Session_Cart) != null)
                         {
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index">
@@ -62,15 +62,15 @@
                                     (@HttpContextAccessor.HttpContext.Session.GetInt32(SD.Session_Cart))
                                 </a>
                             </li>
-                        }
-                        else
-                        {
+                        } *@
+                       @*  else
+                        { *@
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index">
-                                    <i class="bi bi-cart4"></i> &nbsp; (0)
+                                    @await Component.InvokeAsync("ShoppingCart")
                                 </a>
                             </li>
-                        }                     
+                        @* }  *@
                     </ul>
                     <partial name="_LoginPartial"/>
                 </div>
