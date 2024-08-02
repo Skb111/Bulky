@@ -17,5 +17,7 @@ namespace Bulky.Utility
         public const string Payment_Status_Delayed_Payment = "PaymentStatusDelayedPayment";
         public const string Status_Approved = "StatusApproved";
         public const string Payment_Status_Approved = "PaymentStatusApproved";
+        public const string Status_InProcess = "StatusInProcess";
+        public const string Status_Shipped = "StatusShipped";
     }
 }
