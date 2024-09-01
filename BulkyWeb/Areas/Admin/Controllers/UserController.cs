@@ -25,7 +25,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
         public IActionResult Index()
         {
             return View();
-        }
+        } 
 
 
         #region API CALLS
@@ -33,8 +33,14 @@ namespace BulkyWeb.Areas.Admin.Controllers
         public IActionResult GetAll()
         {
             List<ApplicationUser> objUserList = _context.ApplicationUsers.Include(u => u.Company).ToList();
+            var userRoles = _context.UserRoles.ToList();
+            var roles = _context.Roles.ToList();
+
             foreach (var user in objUserList)
             {
+                var roleId = userRoles.FirstOrDefault(u=>u.UserId == user.Id).RoleId;
+                user.Role = roles.FirstOrDefault(u => u.Id == roleId).Name;
+
                 if (user.Company == null)
                 {
                     user.Company = new() { Name = "" };
@@ -43,19 +49,25 @@ namespace BulkyWeb.Areas.Admin.Controllers
             return Json(new { data = objUserList });
         }
 
-        [HttpDelete]
-        public IActionResult Delete(int? id)
+        [HttpPost]
+        public IActionResult LockUnlock([FromBody]string id)
         {
-            //var CompanyToBeDeleted = _unitOfWork.Company.Get(u => u.Id == id);
-            //if (CompanyToBeDeleted == null)
-            //{
-            //    return Json(new { success  = false, message = "Error while deleting"});
-            //}
+            var objFromDb = _context.ApplicationUsers.FirstOrDefault(u => u.Id == id);
+            if (objFromDb == null)
+            {
+                return Json(new { success = false, message = "Error while Locking/Unlocking" });
+            }
+            if (objFromDb.LockoutEnd!=null && objFromDb.LockoutEnd > DateTime.Now)
+            {
+                objFromDb.LockoutEnd = DateTime.Now;
+            }
+            else
+            {
+                objFromDb.LockoutEnd = DateTime.Now.AddYears(1000);
+            }
+            _context.SaveChanges();
 
-            //_unitOfWork.Company.Remove(CompanyToBeDeleted);
-            //_unitOfWork.Save();
-
-            return Json(new { success = true, message = "Deleted Successfully!!!" });
+            return Json(new { success = true, message = "Action Performed Successfully!!!" });
         }
 
         #endregion
