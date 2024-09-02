@@ -70,6 +70,27 @@ namespace BulkyWeb.Areas.Admin.Controllers
             return Json(new { success = true, message = "Action Performed Successfully!!!" });
         }
 
+        public IActionResult RoleMgmt(string userId)
+        {
+            string RoleId = _context.UserRoles.FirstOrDefault(u=>u.UserId == userId).RoleId;
+            RoleMgtVM roleMgtVM = new RoleMgtVM()
+            {
+                ApplicationUser = _context.ApplicationUsers.Include(u => u.Company).FirstOrDefault(u => u.Id == userId),
+                RoleList = _context.Roles.Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Name
+                }),
+                CompanyList = _context.Companies.Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }),
+            };
+            roleMgtVM.ApplicationUser.Role = _context.Roles.FirstOrDefault(u => u.Id == RoleId).Name;
+            return View(roleMgtVM);
+        }
+
         #endregion
     }
 }

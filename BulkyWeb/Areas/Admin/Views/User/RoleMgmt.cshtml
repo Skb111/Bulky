@@ -1,0 +1,43 @@
+﻿@model RoleMgtVM
+
+<form method="post">
+    <input type="hidden" asp-for="ApplicationUser.Id"/>
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Manage UserRole</h2>
+            <hr />
+        </div>
+
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3 row p-1">
+            <label asp-for="ApplicationUser.Name"> </label>
+            <input asp-for="ApplicationUser.Name" readonly type="text" class="form-control" />
+            <span asp-validation-for="ApplicationUser.Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 row p-1">
+            <select asp-for="ApplicationUser.Role" asp-items="@Model.RoleList" class="form-select"></select>
+        </div> 
+        <div class="mb-3 row p-1">
+            <select asp-for="ApplicationUser.CompanyId" asp-items="@Model.CompanyList" class="form-select"></select>
+        </div>
+
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">UpdateRole</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-action="Index" class="btn btn-secondary border form-control">
+                    <i class="bi bi-cart4"></i> Back2List
+                </a>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts
+    {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

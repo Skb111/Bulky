@@ -23,17 +23,21 @@ function loadDataTable() {
 
                     if (lockout > today) {
 
-                        return `<div class="text-center">
-                               <a onclick=LockUnlock('${data.id}') class="btn btn-success text-white" style="cursor: pointer; width: 100px;" <i class="bi bi-unlock-fill"></i>Lock</a>
-                               <a class="btn btn-success text-white" style="cursor: pointer; width: 150px;" <i class="bi bi-unlock-fill"></i>Permission </a>
+                        return `
+                        <div class="text-center">
+                               <a onclick=LockUnlock('${data.id}') class="btn btn-success text-white" style="cursor: pointer; width: 100px;"> <i class="bi bi-unlock-fill"></i>Lock</a>
+                               <a href="/admin/user/RoleMgmt?userId=${data.id}" class="btn btn-success text-white" style="cursor: pointer; width: 150px;"> <i class="bi bi-unlock-fill"></i>Permission </a>
 
-                            </div>`
+                            </div>
+                            `
                     } else {
-                        return `<div class="text-center">
-                               <a onclick=LockUnlock('${data.id}') class="btn btn-danger text-white" style="cursor: pointer; width: 100px;" <i class="bi bi-unlock-fill"></i>Unlock  </a>
-                               <a class="btn btn-success text-white" style="cursor: pointer; width: 150px;" <i class="bi bi-unlock-fill"></i>Permission </a>
+                        return `
+                        <div class="text-center">
+                               <a onclick=LockUnlock('${data.id}') class="btn btn-danger text-white" style="cursor: pointer; width: 100px;"> <i class="bi bi-unlock-fill"></i>Unlock  </a>
+                               <a href="/admin/user/RoleMgmt?userId=${data.id}" class="btn btn-success text-white" style="cursor: pointer; width: 150px;"> <i class="bi bi-unlock-fill"></i>Permission </a>
 
-                            </div>`
+                            </div>
+                            `
                     }
                 },
                 "width": "15%"
